@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+:root,
+.light {
+  --mini-add-bg-color: #5a6d57;
+  --bg-color: #ffffff;
+}
+
+.dark {
+  --background-color: #181a2a;
+  --mini-add-bg-color: #5a6d57;
+  --bg-color: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,12 +22,11 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.animate-in {
+  animation-delay: calc(var(--index) * 130);
+}
+
+input::placeholder {
+  text-transform: capitalize;
+  letter-spacing: 0.1rem;
 }
