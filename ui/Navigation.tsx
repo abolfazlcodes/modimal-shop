@@ -26,7 +26,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="sticky bg-bgColor px-4 py-2 shadow-sm">
+    <nav className="relative bg-bgColor px-4 py-2 shadow-sm">
       <div className="m-auto flex w-full max-w-screen-2xl items-center justify-between gap-1">
         <Modal>
           <Logo />
