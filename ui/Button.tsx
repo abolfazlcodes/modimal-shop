@@ -37,18 +37,19 @@ const Button: React.FC<IButtonProps> = ({
       <button
         className={`${sizeStyles} ${customStyles} ${typeStyles} h-10 flex items-center justify-center text-base`}
       >
-        <Link href="/products">{children}</Link>
+        <Link href={href}>{children}</Link>
       </button>
     );
   }
 
-  return (
-    <button
-      className={`${sizeStyles} ${customStyles} ${typeStyles} h-10 flex items-center justify-center text-base`}
-    >
-      {children}
-    </button>
-  );
+  if (!href)
+    return (
+      <button
+        className={`${sizeStyles} ${customStyles} ${typeStyles} h-10 flex items-center justify-center text-base`}
+      >
+        {children}
+      </button>
+    );
 };
 
 export default Button;

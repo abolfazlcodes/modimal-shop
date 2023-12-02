@@ -6,7 +6,10 @@ const LeagueSpartan = League_Spartan({ subsets: ["latin"] });
 
 const Hero = () => {
   return (
-    <section className="w-full h-[30rem] lg:h-[45rem] relative">
+    <section
+      data-testid="hero-section"
+      className="w-full h-[30rem] lg:h-[45rem] relative"
+    >
       <Image
         src="/hero.png"
         fill
