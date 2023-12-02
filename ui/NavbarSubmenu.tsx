@@ -13,7 +13,7 @@ const NavbarSubmenu: React.FC<INavbarSubmenuProps> = ({ submenuData }) => {
     <>
       <article
         data-testid="list-item-submenu-element"
-        className="absolute invisible md:block left-0 top-[110%] z-50 h-max w-full gap-1 bg-white px-4 py-4 opacity-0 transition-all duration-200 ease-in group-hover:visible group-hover:top-full group-hover:z-50 group-hover:opacity-100"
+        className="absolute invisible md:block left-0 top-[110%] z-10 h-max w-full gap-1 bg-white px-4 py-4 opacity-0 transition-all duration-200 ease-in group-hover:visible group-hover:top-full group-hover:z-10 group-hover:opacity-100"
       >
         <div className="m-auto flex max-w-screen-2xl">
           <div className="flex flex-1 justify-between">
