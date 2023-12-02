@@ -1,6 +1,6 @@
 import { INavbarSubmenuItemsProps } from "@/constants/navbar.constants";
 import Link from "next/link";
-import StaticImageComponent from "./StaticImageComponent";
+import Image from "next/image";
 
 type INavbarSubmenuProps = {
   submenuData: INavbarSubmenuItemsProps;
@@ -8,8 +8,6 @@ type INavbarSubmenuProps = {
 
 const NavbarSubmenu: React.FC<INavbarSubmenuProps> = ({ submenuData }) => {
   const { images, linkItems } = submenuData;
-  // const source =
-  //   "https://images.unsplash.com/photo-1621961458348-f013d219b50c?auto=format&fit=crop&w=1000&q=80";
 
   return (
     <>
@@ -39,14 +37,15 @@ const NavbarSubmenu: React.FC<INavbarSubmenuProps> = ({ submenuData }) => {
                 key={`${imageItem.name}-${index}`}
                 className="flex flex-col gap-3"
               >
-                <Link href="/">
-                  <StaticImageComponent
-                    src={imageItem.src}
+                <Link
+                  href="/"
+                  className="item-center overflow-hidden flex relative h-64 lg:h-80 w-44 lg:w-64 rounded"
+                >
+                  <Image
+                    src={imageItem.src.replace("./public", "")}
                     alt={`${imageItem.name} image`}
-                    fill
-                    priority
                     className="h-full w-full object-cover object-top"
-                    type="blur"
+                    fill
                   />
                 </Link>
                 <span className="text-sm capitalize text-[#404040]">

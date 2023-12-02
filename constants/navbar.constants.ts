@@ -5,7 +5,8 @@ export interface INavbarSubmenuItemsProps {
   }[];
   images: { src: string; name?: string }[];
 }
-
+// const source =
+//   "https://images.unsplash.com/photo-1621961458348-f013d219b50c?auto=format&fit=crop&w=1000&q=80";
 export interface NavbarItemsProps {
   id: number;
   title: string;

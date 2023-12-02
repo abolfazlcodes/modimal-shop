@@ -1,30 +1,13 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import {
-  StaticImageComponentProps,
-  ImageColorPlaiceholderProps,
-} from "@/types/staticimagecomponent.types";
-import { getImagePlaiceholder } from "@/utils/image-plaiceholder.utils";
+import { StaticImageComponentProps } from "@/types/staticimagecomponent.types";
+import { getPlaiceholder } from "plaiceholder";
+import fs from "node:fs/promises";
 
-function StaticImageComponent(props: StaticImageComponentProps) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [base64, setBase64] = useState<string>();
-  const [color, setColor] = useState<ImageColorPlaiceholderProps>();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { blurImage, color } = await getImagePlaiceholder(
-          props.src.replace("./public", ""),
-        );
-        setBase64(blurImage);
-        setColor(color);
-      } catch (error) {
-        console.error("Error fetching blurred image:", error);
-      }
-    };
-    fetchData();
-  }, [props.src]);
+export default async function StaticImageComponent(
+  props: StaticImageComponentProps,
+) {
+  const buffer = await fs.readFile(`${props.src}`);
+  const { base64, color } = await getPlaiceholder(buffer);
 
   return (
     <div className="item-center overflow-hidden flex relative h-64 lg:h-80 w-44 lg:w-64 rounded">
@@ -45,20 +28,17 @@ function StaticImageComponent(props: StaticImageComponentProps) {
               backgroundColor: color.hex,
             }}
             className={`absolute w-full h-full ${
-              props.animationSlideDir === "left" && !isLoading
+              props.animationSlideDir === "left"
                 ? "-translate-x-full"
-                : props.animationSlideDir === "right" && !isLoading
+                : props.animationSlideDir === "right"
                   ? "translate-x-full"
                   : ""
-            } duration-150 transition-all ease-in inline-block rounded z-10 top-0 left-0`}
+            } duration-400 transition-all ease-in inline-block rounded z-10 top-0 left-0`}
           ></span>
           <Image
             {...props}
             src={props.src.replace("./public", "")}
             alt={props.alt}
-            onLoad={() => {
-              setIsLoading(false);
-            }}
           />
         </>
       )}
@@ -70,29 +50,16 @@ function StaticImageComponent(props: StaticImageComponentProps) {
               backgroundColor: color.hex,
             }}
             className={`absolute w-full h-full ${
-              !isLoading ? "opacity-0 invisible" : "visible opacity-100"
+              color ? "opacity-0 invisible" : "visible opacity-100"
             } duration-150 transition-all ease-in inline-block rounded z-10 top-0 left-0`}
           ></span>
           <Image
             {...props}
             src={props.src.replace("./public", "")}
             alt={props.alt}
-            onLoad={() => {
-              setIsLoading(false);
-            }}
           />
         </>
       )}
-
-      {/* {!base64 && !color && (
-        <Image
-          {...props}
-          src={props.src.replace("http://localhost:3000", "")}
-          alt={props.alt}
-        />
-      )} */}
     </div>
   );
 }
-
-export default StaticImageComponent;
